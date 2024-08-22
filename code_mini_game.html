@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Popup Form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url(./background.jpg);
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .wrapper {
+            border: 1px solid red;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            background-color: #EE82EE;
+            border-radius: 30px;
+        }
+
+        .check {
+            color: white;
+            background-color: #0000FF;
+            padding: 2px 30px;
+            margin-bottom: 24px;
+            border-radius: 24px;
+        }
+
+        .input {
+            width: 200px;
+            height: 50px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <form>
+        <div class="wrapper">
+            <h1>Решите пример</h1>
+            <h2 class="calculate"></h2>
+            <h2><i>Ваш ответ:</i></h2>
+            <input class="input" type="text">
+            <button class="check"><h2>Показать результат</h2></button>
+        </div>
+    </form>
+
+    <script>
+        const calculate = document.querySelector('.calculate');
+        const check = document.querySelector('.check');
+        const input = document.querySelector('.input');
+
+        const getRandomNumber = (min, max) => {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        let firstNumber = getRandomNumber(1, 9);
+        let secondNumber = getRandomNumber(1, 9);
+        let res = firstNumber * secondNumber;
+
+        calculate.textContent = `${firstNumber} * ${secondNumber} = ?`;
+
+        check.addEventListener('click', () => {
+            if (res === Number(input.value)) {
+                    alert('Поздравляю! Вы ответили верно!');
+
+                firstNumber = getRandomNumber(1, 9);
+                secondNumber = getRandomNumber(1, 9);
+
+                calculate.textContent = `${firstNumber} * ${secondNumber}`;
+            }
+
+            else {
+                    alert('Ответ неверный! Правильный ответ: ' + res);
+            }
+
+        input.value = '';
+        input.focus();
+        })
+
+        check.onmouseover = function() {
+            if (res === Number(input.value)) {
+                check.style.background= "#32CD32";
+            }
+
+            else {
+                   check.style.background= "red";
+            }
+        };
+        check.onmouseleave = function() {
+        check.style.background= "#0000FF";
+        };
+    </script>
+</body>
+</html>
